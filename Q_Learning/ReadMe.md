@@ -1,2 +1,2 @@
 ### the q learning structure
-![](https://github.com/MorvanZhou/Reinforcement-learning-with-tensorflow/q_learning.jpeg)
+![](https://github.com/LeslieZhoa/My_RL_Learning/blob/master/Q_Learning/img/q_learning.jpeg)
