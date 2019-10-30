@@ -107,34 +107,33 @@ class Critic(object):
         self.replacement = replacement
 
         with tf.variable_scope('Critic'):
-            # Input (s, a), output q
-            self.a = tf.stop_gradient(a)    # stop critic update flows to actor
-            self.q = self._build_net(S, self.a, 'eval_net', trainable=True)
+            self.a = tf.stop_gradient(a)
+            self.q = self._build_net(S,self.a,'eval_net',trainable=True)
 
-            # Input (s_, a_), output q_ for q_target
-            self.q_ = self._build_net(S_, a_, 'target_net', trainable=False)    # target_q is based on a_ from Actor's target_net
+            self.q_ = self._build_net(S_,a_,'target_net',trainable=False)
 
-            self.e_params = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope='Critic/eval_net')
-            self.t_params = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope='Critic/target_net')
-
+            self.e_params = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES,scope='Critic/eval_net')
+            self.t_params = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES,scope='Critic/target_net')
+        
         with tf.variable_scope('target_q'):
             self.target_q = R + self.gamma * self.q_
 
         with tf.variable_scope('TD_error'):
-            self.loss = tf.reduce_mean(tf.squared_difference(self.target_q, self.q))
-
+            self.loss = tf.reduce_mean(tf.squared_difference(self.target_q,self.q))
+        
         with tf.variable_scope('C_train'):
             self.train_op = tf.train.AdamOptimizer(self.lr).minimize(self.loss)
-
+        
         with tf.variable_scope('a_grad'):
-            self.a_grads = tf.gradients(self.q, self.a)[0]   # tensor of gradients of each sample (None, a_dim)
-
+            self.a_grads = tf.gradients(self.q,self.a)[0]
+        
         if self.replacement['name'] == 'hard':
             self.t_replace_counter = 0
-            self.hard_replacement = [tf.assign(t, e) for t, e in zip(self.t_params, self.e_params)]
+            self.hard_replacement = [tf.assign(t,e) for t,e in zip(self.t_params,self.e_params)]
         else:
-            self.soft_replacement = [tf.assign(t, (1 - self.replacement['tau']) * t + self.replacement['tau'] * e)
-                                     for t, e in zip(self.t_params, self.e_params)]
+            self.soft_replacement = [tf.assign(t,(1-self.replacement['tau'])*t+self.replacement['tau']*e)
+                                            for t,e in zip(self.t_params,self.e_params)]
+
         
     def _build_net(self,s,a,scope,trainable):
 
