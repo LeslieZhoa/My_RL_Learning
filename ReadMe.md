@@ -5,3 +5,4 @@ Learn RL from [Morvan](https://github.com/MorvanZhou/Reinforcement-learning-with
 - - 优点：更新动作函数，可以应对连续动作，相比于更新价值函数，收敛更快。
 - - 缺点：回合更新
 - actor - critic --> 结合policy gradient和td error，既可以更新连续动作函数，更新价值函数用来单步更新，收敛更快。
+- 连续动作，网络可以输出一个概率分布，最大化目标动作的概率即可。ddpg是使采取该动作的q值最大
