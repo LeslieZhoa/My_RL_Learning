@@ -2,7 +2,7 @@ Learn RL from [Morvan](https://github.com/MorvanZhou/Reinforcement-learning-with
 ## 一些总结归纳
 - Deep Q Learning
   - 一种td error `$新估计=旧估计价值+步长x[目标-旧估计值]$`
-  - loss:$$(r_j + \gamma_{max a'}Q'(\phi_{j+1},a';\theta') - Q(\phi_j,a_j;\theta))^2 $$
+  - loss:\\(r_j + \gamma_{max a'}Q'(\phi_{j+1},a';\theta') - Q(\phi_j,a_j;\theta))^2 \\
     - 其中`$Q'$`为target network `$Q$`为eval network
     - 两个net 结构一致，每c steps将eval参数更新给target
     - 每隔c steps更新是为了固定target network参数，以防参数不固定不便于收敛。类似训练seq2seq
