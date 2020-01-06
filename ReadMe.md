@@ -4,5 +4,6 @@ Learn RL from [Morvan](https://github.com/MorvanZhou/Reinforcement-learning-with
 ![](https://github.com/LeslieZhoa/My_RL_Learning/blob/master/RL_1.png)
 ![](https://github.com/LeslieZhoa/My_RL_Learning/blob/master/RL_2.png)
 
-[makrdowm链接](http://note.youdao.com/noteshare?id=f738ce63493881d6eead8f0dda605b0d)
+原始总结，markdown格式如下所示<br>
+[makrdown链接](http://note.youdao.com/noteshare?id=f738ce63493881d6eead8f0dda605b0d)
 
