@@ -15,8 +15,8 @@ Learn RL from [Morvan](https://github.com/MorvanZhou/Reinforcement-learning-with
 
 - Policy Gradient
   - 一种蒙特卡洛方法
-    - 目的使回报期望最大  <img src="http://latex.codecogs.com/gif.latex?\overline{R}_\theta=\sum_{\tau}R(\tau)P(\tau|\theta)\approx\frac{1}{N}\sum R(\tau^n)"/>
-    - 最终更新函数为  <img src="http://latex.codecogs.com/gif.latex?\nabla\overline{R}_\theta\approx\frac{1}{n}\sum_{n=1}^{N}\sum_{t=1}^{T_n}(\sum_{t'=t}^{T_N}\gamma^{t'-t}r_{t'}^{n}-b)\nabla logP(a_{t}^{n}|S_{t}^{n},\theta)"/>
+    - 目的使回报期望最大  ![](http://latex.codecogs.com/gif.latex?\\overline{R}_\theta=\sum_{\tau}R(\tau)P(\tau|\theta)\approx\frac{1}{N}\sum R(\tau^n))
+    - 最终更新函数为  ![](http://latex.codecogs.com/gif.latex?\\nabla\overline{R}_\theta\approx\frac{1}{n}\sum_{n=1}^{N}\sum_{t=1}^{T_n}(\sum_{t'=t}^{T_N}\gamma^{t'-t}r_{t'}^{n}-b)\nabla logP(a_{t}^{n}|S_{t}^{n},\theta))
   - 损失函数 reward更新只与t'之后相近的有关，越近越有关，越远关联性越小
     - 对于不连续动作：损失函数为收集的动作(也是网络选取的)与网络预测动作的交叉熵
     - 对于连续动作：网络输出为mu,sigma的概率分布，最大化收集动作的概率
@@ -58,7 +58,7 @@ Learn RL from [Morvan](https://github.com/MorvanZhou/Reinforcement-learning-with
     - 改良版：上述net的输入状态s和输出状态s'经过一个特征提取网络，两个特征通过另外的网络可以得到动作a,目的是去除状态中无关信息
   - Reverse Curriculum Generation
     - 给定一个全局状态  <img src="http://latex.codecogs.com/gif.latex?s_g"/>
-    - 找与  <img src="http://latex.codecogs.com/gif.latex?s_g"/> 接近的状态 <img src="http://latex.codecogs.com/gif.latex?\s_1"/>
+    - 找与  <img src="http://latex.codecogs.com/gif.latex?s_g"/> 接近的状态 <img src="http://latex.codecogs.com/gif.latex?s_1"/>
     - 记录到达  <img src="http://latex.codecogs.com/gif.latex?s_1"/> 的回报，去除回报过大(已学习过)过小(难学)的状态
     - 继续找接近的状态不断循环
   - Hierarchical Reinforement learning
