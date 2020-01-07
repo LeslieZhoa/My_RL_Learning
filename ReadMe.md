@@ -15,7 +15,7 @@ Learn RL from [Morvan](https://github.com/MorvanZhou/Reinforcement-learning-with
 
 - Policy Gradient
   - 一种蒙特卡洛方法
-    - 目的使回报期望最大  <img src="http://latex.codecogs.com/gif.latex?\overline{R}_\theta=\sum_{\tau}R(\tau)P(\tau|\theta)\approx\frac{1}{N}\sum R(\tau^n)"/>
+    - 目的使回报期望最大  <img src="http://latex.codecogs.com/gif.latex?\overline{R}_\theta=\sum_{\tau}R(\tau)P(\tau|\theta)=\frac{1}{N}\sum R(\tau^n)"/>
     - 最终更新函数为  ![](http://latex.codecogs.com/gif.latex?\\nabla\overline{R}_\theta\approx\frac{1}{n}\sum_{n=1}^{N}\sum_{t=1}^{T_n}(\sum_{t'=t}^{T_N}\gamma^{t'-t}r_{t'}^{n}-b)\nabla logP(a_{t}^{n}|S_{t}^{n},\theta))
   - 损失函数 reward更新只与t'之后相近的有关，越近越有关，越远关联性越小
     - 对于不连续动作：损失函数为收集的动作(也是网络选取的)与网络预测动作的交叉熵
