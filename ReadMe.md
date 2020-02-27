@@ -38,13 +38,14 @@ Learn RL from [Morvan](https://github.com/MorvanZhou/Reinforcement-learning-with
     - actor:与policy gradient一致
   - 优点：可以更新连续动作函数，更新价值函数用来单步更新，收敛更快
 - DDPG
+  - DDPG
   - Actor-Critic的改进
-    - 更新actor欲使Q值最大,policy gradient -->  <img src="http://latex.codecogs.com/gif.latex?\theta^{k+1}=\theta^k + \alpha E_{s～p^{u^k}}[\nabla _\theta Q^{u^k}(s,\mu_\theta(s))]"/>  需兼顾state space和action space,每个状态可能导致不同的动作；若策略不同，导致状态不同，同<img src="http://latex.codecogs.com/gif.latex?p^{u^k}"/> 分布也不同，需大量数据收敛
-    - 改进版  <img src="http://latex.codecogs.com/gif.latex?\theta^{k+1}=\theta^k + \alpha E_{s～p^{u^k}}[\nabla _\theta \mu_\theta(s) \nabla_a Q^{u^k}(s,a)| _{\mu_\theta(s)})]"/> 只需考虑state space相比上式动作确定，无需考虑策略不同导致分布变化，需更少样本
+    - 更新actor欲使Q值最大,policy gradient --> <img src="http://latex.codecogs.com/gif.latex?%5Ctheta%5E%7Bk&plus;1%7D%3D%5Ctheta%5Ek%20&plus;%20%5Calpha%20E_%7Bs-p%5E%7Bu%5Ek%7D%7D%5B%5Cnabla%20_%5Ctheta%20Q%5E%7Bu%5Ek%7D%28s%2C%5Cmu_%5Ctheta%28s%29%29%5D"/>需兼顾state space和action space,每个状态可能导致不同的动作；若策略不同，导致状态不同，同时<img src="http://latex.codecogs.com/gif.latex?p%5E%7Bu%5Ek%7D"/>分布也不同，需大量数据收敛
+    - 改进版<img src="http://latex.codecogs.com/gif.latex?%5Ctheta%5E%7Bk&plus;1%7D%3D%5Ctheta%5Ek%20&plus;%20%5Calpha%20E_%7Bs-p%5E%7Bu%5Ek%7D%7D%5B%5Cnabla%20_%5Ctheta%20%5Cmu_%5Ctheta%28s%29%20%5Cnabla_a%20Q%5E%7Bu%5Ek%7D%28s%2Ca%29%7C%20_%7B%5Cmu_%5Ctheta%28s%29%7D%29%5D"/> 只需考虑state space相比上式动作确定，无需考虑策略不同导致分布变化，需更少样本
     - 结合DQN思想，actor与critic都使用两个网络一个target一个eval来加快收敛
   - 损失函数：
-    - critic loss 最小化td error  <img src="http://latex.codecogs.com/gif.latex?(r_i + \gamma Q'(s_{i+1},\mu '(s_{i+1}|\theta ^{\mu '})|\theta^{Q'})-Q(s_i,a_i|\theta^Q))"/> 其中都a取自actor
-    - actor梯度更新  <img src="http://latex.codecogs.com/gif.latex?\nabla _{\theta_\mu} J \approx \frac{1}{N}\sum{[\nabla _\theta \mu_\theta(s) \nabla_a Q^{u^k}(s,a)| _{\mu_\theta(s)})]}"/>
+    - critic loss 最小化td error <img src="http://latex.codecogs.com/gif.latex?%28r_i%20&plus;%20%5Cgamma%20Q%27%28s_%7Bi&plus;1%7D%2C%5Cmu%20%27%28s_%7Bi&plus;1%7D%7C%5Ctheta%20%5E%7B%5Cmu%20%27%7D%29%7C%5Ctheta%5E%7BQ%27%7D%29-Q%28s_i%2Ca_i%7C%5Ctheta%5EQ%29%29"/>其中都a取自actor
+    - actor梯度更新<img src="http://latex.codecogs.com/gif.latex?%5Cnabla%20_%7B%5Ctheta_%5Cmu%7D%20J%20%5Capprox%20%5Cfrac%7B1%7D%7BN%7D%5Csum%7B%5B%5Cnabla%20_%5Ctheta%20%5Cmu_%5Ctheta%28s%29%20%5Cnabla_a%20Q%5E%7Bu%5Ek%7D%28s%2Ca%29%7C%20_%7B%5Cmu_%5Ctheta%28s%29%7D%29%5D%7D"/>
   - 训练网络：
     - actor :分target和eval两个，输入状态s输出相应动作a，更新方法与DQN相同，经过c steps两网络参数赋值
     - critic:分target和eval两个,输入状态s与取自actor的动作a,输出相应q值，更新方式同上
